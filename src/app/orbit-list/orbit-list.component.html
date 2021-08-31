@@ -1,3 +1,4 @@
+
 <table>
     <tr class="header-row">
         <th (click)="sort('name')" class="sortable">Name</th>
@@ -6,13 +7,15 @@
         <th>Orbit Type</th>
         <th>Launch Date</th>
     </tr>
-    <tr class="data-row">
-        <td>GPS 938</td>
-        <td>Positioning</td>
-        <td>true</td>
-        <td>HIGH</td>
-        <td>2001-11-01</td>
+    <tr *ngFor = "let satelliteRow of satellites" class="data-row">
+        <td>{{satelliteRow.name}}</td>
+        <td *ngIf="satelliteRow.isSpaceDebris(satelliteRow.type) === true" class="warning">{{satelliteRow.type}}</td>
+        <td *ngIf="satelliteRow.isSpaceDebris(satelliteRow.type) === false">{{satelliteRow.type}}</td>
+        <td>{{satelliteRow.operational}}</td>
+        <td>{{satelliteRow.orbitType}}</td>
+        <td>{{satelliteRow.launchDate}}</td>
     </tr>
+
 </table>
 
 <!-- TODO 2b: use *ngFor to display satellite data in the table -->
